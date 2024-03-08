@@ -1,0 +1,23 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rhel-iso-httpd
+  namespace: igor
+spec:
+  clusterIP: 172.30.144.138
+  ipFamilies:
+    - IPv4
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.144.138
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    vm.kubevirt.io/name: rhel8-total-snipe # <- VM name
+status:
+  loadBalancer: {}
