@@ -4,6 +4,7 @@ The Migration Toolkit for Virtualization (MTV) uses the VMware Virtual Disk Deve
 
 [Documentation link](https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#creating-vddk-image_mtv) 
 
+VDDK download link: https://developer.vmware.com/web/sdk/8.0/vddk/
 
 There is a way how to put VDDK in Openshift Internal Registry. Tested on OCP 4.14.14.
 
