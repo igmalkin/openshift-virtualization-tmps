@@ -1,4 +1,11 @@
-# The Migration Toolkit for Virtualization (MTV) uses the VMware Virtual Disk Development Kit (VDDK) SDK to transfer virtual disks from VMware vSphere.
+# How to put VDDK in Red Hat Openshift internal registry 
+
+The Migration Toolkit for Virtualization (MTV) uses the VMware Virtual Disk Development Kit (VDDK) SDK to transfer virtual disks from VMware vSphere.
+
+Documentation link: 
+
+https://access.redhat.com/documentation/en-us/migration_toolkit_for_virtualization/2.5/html/installing_and_using_the_migration_toolkit_for_virtualization/prerequisites#creating-vddk-image_mtv 
+
 
 There is a way how to put VDDK in Openshift Internal Registry. Tested on OCP 4.14.14.
 
