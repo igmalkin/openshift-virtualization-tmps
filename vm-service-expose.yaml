@@ -1,23 +1,27 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: rhel-iso-httpd
-  namespace: igor
+  name: database
+  namespace: vmexamples
 spec:
-  clusterIP: 172.30.144.138
-  ipFamilies:
-    - IPv4
+  selector:
+    vm.kubevirt.io/name: database # <- VM name
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+#-----------------------------
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp
+  namespace: vmexamples
+spec:
+  selector:
+    env: webapp # <- Custom label
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
-  internalTrafficPolicy: Cluster
-  clusterIPs:
-    - 172.30.144.138
-  type: ClusterIP
-  ipFamilyPolicy: SingleStack
-  sessionAffinity: None
-  selector:
-    vm.kubevirt.io/name: rhel8-total-snipe # <- VM name
-status:
-  loadBalancer: {}
