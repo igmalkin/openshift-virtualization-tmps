@@ -1,0 +1,81 @@
+#-------OADP Operator configuration---------
+spec:
+  backupLocations:
+    - velero:
+        config:
+          profile: default
+          region: local
+          s3ForcePathStyle: 'true'
+          s3Url: 'http://10.15.45.99:9000' #<----your S3 endpoint
+        credential:
+          key: cloud
+          name: cloud-credentials
+        default: true
+        objectStorage:
+          bucket: oadp-bucket02 #<----your S3 bucket
+          prefix: velero
+        provider: aws
+  configuration:
+    nodeAgent:
+      enable: true
+      uploaderType: restic
+    velero:
+      defaultPlugins:
+        - openshift
+        - aws
+        - kubevirt 
+        - csi
+#-------OADP S3 Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloud-credentials
+  namespace: openshift-adp
+data:
+  cloud: |
+    [default]
+    aws_access_key_id = rnu1QWre9hM8JnqSU050
+    aws_secret_access_key = your-secret-key
+#-------Velero Backup Config for VM centos-stream9-web01--------
+---
+apiVersion: velero.io/v1
+kind: Backup
+metadata:
+  name: backup-centos01
+  namespace: openshift-adp
+  labels:
+    velero.io/storage-location: default
+spec:
+  defaultVolumesToFsBackup: false
+  orLabelSelectors:
+  - matchLabels:
+      app: centos01
+  - matchLabels:
+      vm.kubevirt.io/name: centos01
+  csiSnapshotTimeout: 10m0s
+  ttl: 720h0m0s
+  itemOperationTimeout: 4h0m0s
+  storageLocation: velero-test02-1  #<----your storage location (obtained from "BackupStorageLocations"
+  hooks: {}
+  includedNamespaces:
+  - igor
+  snapshotMoveData: false
+#--------Velero Restore Config for VM centos-stream9-web01------
+---
+apiVersion: velero.io/v1
+kind: Restore
+metadata:
+  name: restore-centos01
+  namespace: openshift-adp
+spec:
+  backupName: backup-centos01
+  namespaceMapping:
+    igor: igor-restore
+  includedResources: []
+  excludedResources:
+  - nodes
+  - events
+  - events.events.k8s.io
+  - backups.velero.io
+  - restores.velero.io
+  restorePVs: true
