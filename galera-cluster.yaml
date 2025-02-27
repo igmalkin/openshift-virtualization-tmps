@@ -44,12 +44,13 @@ spec:
               user: cloud-user
               password: cloud8@123
               chpasswd: { expire: False }
-              #rh_subscription:
-                #activation-key: <your_key>
-                #org: <your_org_id>
-                #auto-attach: true
+              rh_subscription:
+                activation-key: <your_key>
+                org: <your_org_id>
+                auto-attach: true
               runcmd:
                 - sudo subscription-manager repos --list-enabled
+                - insights-client --register
                 - sudo dnf module install -y mariadb/galera
                 - |
                     cat <<EOF | sudo tee /etc/my.cnf
@@ -140,12 +141,13 @@ spec:
               user: cloud-user
               password: cloud8@123
               chpasswd: { expire: False }
-              #rh_subscription:
-                #activation-key: <your_key>
-                #org: <your_org_id>
-                #auto-attach: true
+              rh_subscription:
+                activation-key: <your_key>
+                org: <your_org_id>
+                auto-attach: true
               runcmd:
                 - sudo subscription-manager repos --list-enabled
+                - insights-client --register
                 - sudo dnf module install -y mariadb/galera
                 - |
                     cat <<EOF | sudo tee /etc/my.cnf
