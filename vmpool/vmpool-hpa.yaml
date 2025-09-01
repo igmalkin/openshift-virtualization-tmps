@@ -8,7 +8,7 @@ spec:
     kind: VirtualMachinePool
     name: vmpool-linux
     apiVersion: pool.kubevirt.io/v1alpha1
-  minReplicas: 2
+  minReplicas: 3
   maxReplicas: 5
   metrics:
     - type: Resource
