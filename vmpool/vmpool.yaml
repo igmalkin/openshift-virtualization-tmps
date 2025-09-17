@@ -2,7 +2,7 @@ apiVersion: pool.kubevirt.io/v1alpha1
 kind: VirtualMachinePool
 metadata:
   name: vmpool-linux
-  namespace: igor
+  namespace: vmpool
 spec:
   replicas: 1
   selector:
