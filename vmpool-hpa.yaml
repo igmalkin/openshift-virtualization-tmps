@@ -1,0 +1,19 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: hpa-vmpool-fedora
+  namespace: vmpool
+spec:
+  scaleTargetRef:
+    kind: VirtualMachinePool
+    name: vmpool-linux
+    apiVersion: pool.kubevirt.io/v1alpha1
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
