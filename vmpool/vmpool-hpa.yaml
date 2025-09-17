@@ -2,7 +2,7 @@ kind: HorizontalPodAutoscaler
 apiVersion: autoscaling/v2
 metadata:
   name: hpa-vmpool-fedora
-  namespace: igor
+  namespace: vmpool
 spec:
   scaleTargetRef:
     kind: VirtualMachinePool
