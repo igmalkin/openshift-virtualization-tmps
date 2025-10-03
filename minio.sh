@@ -19,7 +19,7 @@ echo "Starting MinIO installation..."
 
 # Step 1: Download and install the MinIO server binary
 echo "Downloading MinIO server..."
-wget https://dl.min.io/server/minio/release/linux-amd64/minio -O /usr/local/bin/minio
+wget https://dl.min.io/server/minio/release/linux-amd64/archive/minio-20241218131544.0.0-1.x86_64.rpm -O /usr/local/bin/minio
 chmod +x /usr/local/bin/minio
 
 # Step 2: Download and install the MinIO client (optional)
